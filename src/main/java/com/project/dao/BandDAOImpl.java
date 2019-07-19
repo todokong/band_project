@@ -45,7 +45,7 @@ public class BandDAOImpl implements BandDAO {
 	public List<BandBoardDTO> boardlist4(int bandcode) {
 		return this.sqlSession.selectList("boardlist4", bandcode);
 	}
-	
+	@Override
 	public List<BandBoardDTO> boardlist5(BandBoardDTO boardDTO) {
 		return this.sqlSession.selectList("boardlist5", boardDTO);
 	}
@@ -161,35 +161,43 @@ public class BandDAOImpl implements BandDAO {
 	public void deleteboard2(int boardcode) {
 		this.sqlSession.delete("deleteboard2", boardcode);		
 	}
+	@Override
 	public List<BandBoardDTO> mboardlist2(BandBoardDTO boardDTO) {	
 		return this.sqlSession.selectList("mboardlist2", boardDTO);
 	}
+	@Override
 	public List<MemberDTO> mdtolist(String invitename) {
 		return this.sqlSession.selectList("mdtolist", invitename);
 	}
+	@Override
 	public MemberDTO mdto(int usercode) {
 		return this.sqlSession.selectOne("mdto", usercode);
 	}
+	@Override
 	public List<BandInviteDTO> invitedto(int usercode) {
 		return this.sqlSession.selectList("invitedto", usercode);
 	}
+	@Override
 	public MemberDTO selectone2(int usercode) {
 		return this.sqlSession.selectOne("selectone2",usercode);
 	}
+	@Override
 	public void invitemember(BandInviteDTO inviteDTO2) {
 		this.sqlSession.insert("invitemember",inviteDTO2);
 	}
+	@Override
 	public int invitecount(int usercode) {
 		return this.sqlSession.selectOne("invitecount",usercode);
 	}
+	@Override
 	public List<BandInviteDTO> invitelist(int i) {
-		// TODO Auto-generated method stub
 		return this.sqlSession.selectList("invitelist", i);
 	}
+	@Override
 	public void deleteinvite(BandInviteDTO inviteDTO) {
-		// TODO Auto-generated method stub
 		this.sqlSession.delete("deleteinvite", inviteDTO);
 	}
+	@Override
 	public void acceptband(BandInviteDTO inviteDTO) {
 		this.sqlSession.insert("acceptband", inviteDTO);
 		
@@ -262,83 +270,54 @@ public class BandDAOImpl implements BandDAO {
        int one ;
        BandBoardDTO dto ;
        
-       
        for( int i=0 ; i<list.size() ;i++){
           one=list.get(i).getBoardcode();
           dto =this.sqlSession.selectOne("boardone", one);
           popboard.add(dto);
-       
        }
-       
        return popboard;
     }
     
 	
-	
-	
-	
-	
-	
 	// 정현
+	@Override
 	public void signUpOk(MemberDTO dto) {
 		this.sqlSession.insert("signUpOk", dto);
-		
 	}
-	
+	@Override
 	public int checkUserId(String userid) {
 		return this.sqlSession.selectOne("checkUserId", userid);
-	}
-/*
-	@Override
-	public int checkUserId(MemberDTO memberDTO) {
-		// TODO Auto-generated method stub
-		return 0;
-	}*/
-	
+	}	
 	@Override
 	public int login(MemberDTO memberDTO) {
 		return this.sqlSession.selectOne("login", memberDTO);
-		
 	}
+	@Override
 	public MemberDTO findid(MemberDTO memberDTO) {
-
 		return this.sqlSession.selectOne("findid",memberDTO);
 	}
-
 	@Override
 	public MemberDTO findpwd(MemberDTO memberDTO) {
 		return this.sqlSession.selectOne("findpwd",memberDTO);
-		
 	}
 	
 	
-	
 	//현욱 
-	
-	
-		@Override
-		public List<BandListDTO> searchBand(String search) {
-			return this.sqlSession.selectList("searchBand", search);
-		}
-		
-		@Override
-		public List<BandBoardDTO> searchBandboard(BandBoardDTO bandBoardDTO) {
-			return this.sqlSession.selectList("searchBoard", bandBoardDTO);
-		}
-
-		@Override
-		public int searchBoardCount(BandBoardDTO bandBoardDTO) {
-			return this.sqlSession.selectOne("searchBoardCount", bandBoardDTO);
-		}
-
-		@Override
-		public MemberDTO member(MemberDTO dto) {
-			return this.sqlSession.selectOne("member", dto);
-		}
-	
-	
-	
-	
-	
+	@Override
+	public List<BandListDTO> searchBand(String search) {
+		return this.sqlSession.selectList("searchBand", search);
+	}	
+	@Override
+	public List<BandBoardDTO> searchBandboard(BandBoardDTO bandBoardDTO) {
+		return this.sqlSession.selectList("searchBoard", bandBoardDTO);
+	}
+	@Override
+	public int searchBoardCount(BandBoardDTO bandBoardDTO) {
+		return this.sqlSession.selectOne("searchBoardCount", bandBoardDTO);
+	}
+	@Override
+	public MemberDTO member(MemberDTO dto) {
+		return this.sqlSession.selectOne("member", dto);
+	}
 	
 }
