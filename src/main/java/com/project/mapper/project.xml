@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.project">
+  	
+  	<select id="select" resultType="com.project.dto.MemberDTO">
+  		select * from member where userid = #{userid}
+  	</select>
+  	
+  	<select id="boardlist" resultType="com.project.dto.BandBoardDTO">
+  		select * from bandboard where bandcode = #{bandcode} order by boardcode desc
+  	</select>
+  	
+  	<select id="boardlist2" resultType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode = #{bandcode} and boardcontent is not null order by boardcode desc) where rowNum <![CDATA[  <  ]]> 6
+  	</select>
+  	
+  	<select id="boardlist3" resultType="com.project.dto.BandBoardDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode = #{bandcode} and boardcontent is not null and boardcode <![CDATA[  <  ]]> #{boardcode} order by boardcode desc) where rowNum <![CDATA[  <  ]]> 6
+  	</select>
+  	
+  	<select id="boardlist4" resultType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode = #{bandcode} and boardimage != 'no_file' order by boardcode desc) where rownum <![CDATA[  <  ]]> 13
+  	</select>
+  	
+  	<select id="boardlist5" resultType="com.project.dto.BandBoardDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode = #{bandcode} and boardimage != 'no_file' and boardcode <![CDATA[  <  ]]> #{boardcode} order by boardcode desc) where rownum <![CDATA[  <  ]]> 13
+  	</select>
+  	
+  	<select id="replylist" resultType="com.project.dto.BoardReplyDTO">
+  		select * from boardreply where bandcode = #{bandcode} order by replycode desc
+  	</select>
+  	
+  	<select id="replylist2" resultType="com.project.dto.BoardReplyDTO" parameterType="com.project.dto.BoardReplyDTO">
+  		select * from boardreply where bandcode = #{bandcode} and boardcode=#{boardcode} order by replycode desc
+  	</select>
+  	  
+  	 <delete id="deleteboard">
+  	 	delete from bandboard where boardcode=#{boardcode}
+  	 </delete>
+  	 
+  	 <insert id="writereply" parameterType="com.project.dto.BoardReplyDTO">
+  		insert into boardreply values(#{bandcode},#{boardcode},#{userid},#{username},reply_seq.nextval,#{replycontent},sysdate)
+  	</insert>
+  	
+  	<select id="replydto" resultType="com.project.dto.BoardReplyDTO">
+  		select * from boardreply where replycode = (select max(replycode) from boardreply)
+  	</select>
+  	
+  	<delete id="deletereply">
+  		delete from boardreply where replycode = #{replycode}
+  	</delete>
+  	
+  	<update id="updatereply" parameterType="com.project.dto.BoardReplyDTO">
+  		update boardreply set replycontent=#{replycontent} where replycode=#{replycode}
+  	</update>
+  	
+  	<select id="replydto2" resultType="com.project.dto.BoardReplyDTO">
+  		select * from boardreply where replycode = #{replycode}
+  	</select>
+  	
+  	<insert id="writeboard" parameterType="com.project.dto.BandBoardDTO">  	
+  		insert into bandboard values(#{bandcode},#{userid},#{username},board_seq.nextval,#{boardcontent},sysdate,#{boardimage})
+  	</insert>
+  	
+  	<update id="updateboardOk" parameterType="com.project.dto.BandBoardDTO">
+  		update bandboard set boardcontent=#{boardcontent}, boardimage=#{boardimage} where boardcode=#{boardcode}
+  	</update>
+  	
+  	<update id="updateboardOk2" parameterType="com.project.dto.BandBoardDTO">
+  		update bandboard set boardcontent=#{boardcontent} where boardcode=#{boardcode}
+  	</update>
+  	
+  	<select id="banddto" resultType="com.project.dto.BandListDTO">
+  		select * from bandlist where bandcode=#{bandcode}
+  	</select>
+  	
+  	<delete id="bandout">
+  		delete from bandmember where bandcode=#{bandcode} and userid=#{userid}
+  	</delete>
+  	
+  	<select id="bandmember" parameterType="com.project.dto.BandMemberDTO" resultType="int">
+  		select count(*) from bandmember where bandcode=#{bandcode} and userid=#{userid}
+  	</select>
+  	
+  	<insert id="joinband" parameterType="com.project.dto.BandMemberDTO">
+  		insert into bandmember values(#{bandcode},#{userid})
+  	</insert>
+  	
+  	<select id="memberlist" resultType="com.project.dto.BandMemberDTO">
+  		select * from bandmember where bandcode=#{bandcode}
+  	</select>
+  	
+  	<select id="memberlist2" resultType="com.project.dto.BandMemberDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from bandmember where bandcode=#{bandcode} and username like '%'||#{username}||'%'
+  	</select>
+  	
+  	<select id="membername" resultType="com.project.dto.MemberDTO">
+  		select * from member where userid=#{userid}
+  	</select>
+  	
+  	<insert id="insertimage" parameterType="com.project.dto.BandBoardDTO">
+  		insert into bandboard(bandcode, userid, username, boardcode, boarddate, boardimage) values(#{bandcode}, #{userid},#{username},board_seq.nextval,sysdate,#{boardimage})
+  	</insert>
+  	
+  	<select id="imagereply" resultType="com.project.dto.BoardReplyDTO">
+  		select * from boardreply where boardcode=#{boardcode}
+  	</select>
+  	
+  	<select id="boardcont" resultType="com.project.dto.BandBoardDTO">
+  		select * from bandboard where boardcode=#{boardcode}
+  	</select>
+  	
+  	<select id="preboard" resultType="com.project.dto.BandBoardDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode=#{bandcode} and boardimage != 'no_file' and boardcode <![CDATA[ > ]]> #{boardcode} order by boardcode) where rownum = 1
+  	</select>
+  	
+  	<select id="minboard" resultType="com.project.dto.BandBoardDTO">
+  		select * from bandboard where bandcode=#{bandcode} and boardcode = (select min(boardcode) from bandboard where boardimage != 'no_file')
+  	</select>
+  	
+  	<select id="nextboard" resultType="com.project.dto.BandBoardDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from bandboard where bandcode=#{bandcode} and boardimage != 'no_file' and boardcode  <![CDATA[ < ]]> #{boardcode} and rowNum = 1 order by boardcode desc
+  	</select>
+  	
+  	<select id="maxboard" resultType="com.project.dto.BandBoardDTO">
+  		select * from bandboard where boardcode = (select max(boardcode) from bandboard where bandcode =#{bandcode} and boardimage != 'no_file')
+  	</select>
+  	
+  	<select id="mboardlist" resultType="com.project.dto.BandBoardDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode=#{bandcode} and userid=#{userid} and boardcontent is not null order by boardcode desc) where rowNum <![CDATA[  <  ]]> 6 		
+  	</select>
+  	
+  	<select id="mboardlist2" resultType="com.project.dto.BandBoardDTO" parameterType="com.project.dto.BandBoardDTO">
+  		select * from (select * from bandboard where bandcode=#{bandcode} and userid=#{userid} and boardcontent is not null and boardcode <![CDATA[  <  ]]> #{boardcode} order by boardcode desc) where rowNum <![CDATA[  <  ]]> 6 		
+  	</select>
+  	
+  	<delete id="deleteimage">
+  		delete from bandboard where boardcode=#{boardcode}
+  	</delete>
+ 
+  	<delete id="deleteboard2">
+  		delete from boardreply where boardcode=#{boardcode}
+  	</delete>
+  	
+  	<select id="mdtolist" resultType="com.project.dto.MemberDTO">
+  		select * from member where username like '%'||#{invitename}||'%'
+  	</select>
+  	
+  	<select id="mdto" resultType="com.project.dto.MemberDTO">
+  		select * from member where usercode = #{usercode}
+  	</select>
+  	
+  	<select id="invitedto" resultType="com.project.dto.BandInviteDTO">
+  		select * from bandinvite where inviteusercode = #{usercode}
+  	</select>
+  	
+  	<select id="selectone2" resultType="com.project.dto.MemberDTO">
+  		select * from member where usercode = #{usercode}
+  	</select>
+  	
+  	<select id="invitemember" parameterType="com.project.dto.BandInviteDTO">
+  		insert into bandinvite values(#{inviteusercode},#{bandcode},#{userid},#{username},#{bandname})
+  	</select>
+  	
+  	<select id="invitecount" resultType="int">
+  		select count(*) from bandinvite where inviteusercode = #{usercode}
+  	</select>
+  	
+  	<select id="invitelist" resultType="com.project.dto.BandInviteDTO">
+  		select * from bandinvite where inviteusercode = #{i}
+  	</select>
+  	
+  	<select id="deleteinvite" parameterType="com.project.dto.BandInviteDTO">
+  		delete from bandinvite where bandcode=#{bandcode} and inviteusercode = #{inviteusercode}
+  	</select>
+  	
+  	<insert id="acceptband" parameterType="com.project.dto.BandInviteDTO">
+  		insert into bandmember values(#{bandcode},#{userid})
+  	</insert>
+  	
+  	
+  	
+  	<!-- 혜림 -->
+  	<select id="bandlist" resultType="com.project.dto.BandListDTO">
+		select * from bandlist where bandcode in (select bandcode from bandmember
+		where userid=#{userid})
+	</select>
+	
+	<select id="memberlist3" resultType="com.project.dto.BandCountDTO">
+		select bandcode,count(bandcode)as bandcount
+		from bandmember
+		group by bandcode
+		order by bandcount desc
+	</select>
+	
+	<select id="one" resultType="com.project.dto.BandListDTO"
+		parameterType="int">
+		select * from bandlist where bandcode=#{bandcode}
+	</select>
+	
+	<insert id="bandlistadd"  parameterType="com.project.dto.BandListDTO" >
+	
+		insert into bandlist values(band_seq.nextval,#{bandname},#{bandinfo},#{bandimage})
+	</insert>
+	
+	<insert id="bandmemberadd">
+		insert into bandmember values(band_seq.nextval-1,#{userid})
+	</insert>
+	
+	<select id="countlist" resultType="com.project.dto.BandCountDTO">
+	select bandcode, count(*) as bandcount
+	from bandmember
+	where bandcode in(select bandcode
+	from bandmember
+	where userid=#{userid})
+	group by bandcode
+	</select>
+	<select id="gongji" resultType="com.project.dto.GongjiBoardDTO">
+		select *
+		from adminboard
+	</select>
+	
+	<select id="reply" resultType="com.project.dto.BoardReplyCountDTO">
+   
+   select *
+    from
+   (select boardcode ,count(boardcode) as totalreplaycount
+   from boardreply
+   GROUP BY boardcode
+   order by totalreplaycount desc)
+   where rowNum <![CDATA[  <  ]]> 5
+      
+   </select>
+	
+	<select id="boardone" resultType="com.project.dto.BandBoardDTO">
+		select *
+		from bandboard
+		where boardcode =#{one}
+	</select>
+  	
+  	
+  	
+  	
+  	
+  	<!-- 윤정 -->
+  	<select id = "getMember" resultType="com.project.dto.MemberDTO">
+		SELECT 
+			*
+		FROM 
+			member
+	</select>
+	<select id = "getBoard" resultType="com.project.dto.BandBoardDTO">
+		SELECT 
+			*
+		FROM 
+			bandboard
+		WHERE
+			userid = #{userid}
+	</select>
+	<select id = "getReply" resultType="com.project.dto.BoardReplyDTO">
+		SELECT 
+			*
+		FROM 
+			boardreply
+		WHERE
+			userid = #{userid}
+	</select>
+	
+	<!-- <insert id="addProject">
+		INSERT INTO pm_project
+			(id, name, description, start_date, end_date, user_name)
+		VALUES
+			(pm_project_seq.NEXTVAL, #{name}, #{description}, #{startDate},#{endDate}, #{userName}) 
+	</insert>
+	<delete id="deleteProject">
+		DELETE FROM 
+			pm_project
+		WHERE
+			id = #{id}
+	</delete>
+	<update id="updateProject">
+    	UPDATE 
+    		pm_project
+		SET 
+			name = #{name}, 
+			description = #{description}, 
+			start_date = #{startDate}, 
+			end_date = #{endDate}
+		WHERE 
+			id = #{id}
+    </update> -->
+  	
+  	
+  	
+  	
+  	
+  	<!-- 정현 -->
+  	<insert id="signUpOk" parameterType="com.project.dto.MemberDTO">
+  		insert into member values(#{userid},#{pwd},#{username},#{phone},member_seq.nextval)
+  	</insert>
+  	
+  	 <select id="checkUserId" resultType="int">
+  		select count(*) from member where userid=#{userid}
+  	</select>
+  	
+  	
+  	
+  	
+  	<select id="login" resultType="int">
+  		select count(*) from member where userid=#{userid} and pwd=#{pwd}
+  	</select>
+  	
+  	<select id="navLogin" resultType="int">
+  		select count(*) from member where navFlag = 1 and userid={#id }
+  	</select>
+  	
+  	<select id = "findid" resultType = "com.project.dto.MemberDTO">
+     	select * from member where username=#{username} and phone=#{phone}
+	</select>
+	
+  	<select id = "idres" parameterType="com.project.dto.MemberDTO">
+  	    select userid from member where username = #{username} and phone = #{phone}
+  	</select>
+  	
+  	 <select id = "findpwd" resultType = "com.project.dto.MemberDTO">
+        select * from member where userid=#{userid} and username=#{username} and phone=#{phone}
+	</select>
+	
+	  <select id = "pwdres" parameterType="com.project.dto.MemberDTO">
+  	    select pwd from member where userid = #{userid} and username=#{username} and phone = #{phone}
+  	</select>
+  	
+  	
+  	<!-- 현욱 -->
+  	 <select id="searchBand" resultType="com.project.dto.BandListDTO">
+        select * from bandlist where bandname like '%'||#{searchValue}||'%'
+     </select>
+     
+     <select id="searchBoardCount" parameterType="com.project.dto.BandBoardDTO"
+     resultType="int">
+    select count(*)  from bandboard b join bandlist l on b.bandcode=l.bandcode where boardcontent LIKE '%'||#{searchValue}||'%'
+     </select>
+     
+     <select id="searchBoard" parameterType="com.project.dto.BandBoardDTO" resultType="com.project.dto.BandBoardDTO">
+        
+        select * from (select row_number() over(order by boarddate desc) as rnum, b.bandcode, b.userid, b.username, 
+         b.boardcode, b.boardcontent, b.boarddate, l.bandname from bandboard b join bandlist l on b.bandcode=l.bandcode
+         where boardcontent LIKE '%'||#{searchValue}||'%') where rnum BETWEEN #{startRowNo} and #{endRowNo}
+        
+     </select>
+  	
+  </mapper>

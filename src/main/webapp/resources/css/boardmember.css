@@ -1,0 +1,52 @@
+@charset "UTF-8";
+#header{
+	border: 1px solid black;
+	height: 100px;
+}
+#logo{
+	float: left;
+	height: 80px;
+	width: 100px;
+}
+#search{
+	float: right;
+	font-size: 20px;
+	margin-right: 20px;
+}
+#profile{
+	float: right;
+	font-size: 20px;
+	margin-right: 20px;
+}
+#left{
+	float: left;
+	border: 1px solid black;
+	width: 20%;
+	height: auto;
+}
+#center{
+	float: left;
+	border: 1px solid black;
+	width: 60%;
+	height: auto;
+	/* background: #EAEAEA; */
+}
+#right{
+	float: left;
+	border: 1px solid black;
+	width: 20%;
+	height: auto;
+}
+.board_member{
+	background: white;
+	border: 1px solid black;
+	margin: 20px;
+	width: 70%;
+}
+#leftcontent{
+	margin-top: 100px;
+	margin-left: 100px;
+}
+img{
+	max-width: 400px;
+}

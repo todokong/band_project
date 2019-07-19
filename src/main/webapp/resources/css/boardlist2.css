@@ -1,0 +1,79 @@
+@charset "UTF-8";
+#header{
+	border: 1px solid black;
+	height: 100px;
+}
+#logo{
+	float: left;
+	height: 80px;
+	width: 100px;
+}
+#search{
+	float: right;
+	font-size: 20px;
+	margin-right: 20px;
+}
+#profile{
+	float: right;
+	font-size: 20px;
+	margin-right: 20px;
+}
+#left{
+	float: left;
+	border: 1px solid black;
+	width: 20%;
+	height: auto;
+}
+#center{
+	float: left;
+	border: 1px solid black;
+	width: 60%;
+	height: auto;
+	/* background: gray; */
+}
+#right{
+	float: left;
+	border: 1px solid black;
+	width: 20%;
+	height: auto;
+}
+.board_table{
+	border: 1px solid black;
+	margin: 20px;
+	width: 70%;
+}
+.board_username{
+	width: 100px;
+}
+.board_date{
+	width: 550px;
+}
+.board_button{
+	width: 100px;
+}
+.board_content{
+	width: 650px;	
+}
+.board_image{
+	width: 650px;
+}
+.reply_table{
+	margin: 5px;
+	width: 700px;
+}
+.reply_username{
+	width: 100px;
+}
+.reply_content{
+	width: 550px;
+}
+.reply_button{
+	width: 100px;
+}
+#leftcontent{
+	margin-top: 100px;
+	margin-left: 100px;
+}
+img{
+	max-width: 400px;
+}
