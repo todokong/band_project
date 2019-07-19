@@ -866,8 +866,7 @@ public class HomeController {
         bandBoardDTO.setStartPageNo(startPage); 
         bandBoardDTO.setEndPageNo(endPage);  
 
-
-
+        /*asdf*/
         
         int startRowNo = ((pageNo-1) * pageSize ) + 1;
         int endRowNo = pageNo * pageSize; 

@@ -426,7 +426,7 @@
        jQuery("form[name=frm]").attr("method", "post");
        jQuery("form[name=frm]").attr("action","find.do").submit();
    }
-   //검색 버튼
+   //검색 버튼 //
    function fn_search(){
        
        var searchValue = jQuery("#search").val();
