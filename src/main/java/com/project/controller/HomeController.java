@@ -610,25 +610,25 @@ public class HomeController {
 		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
 		session.setAttribute("dto", dto);
 		
-		System.out.println("aa");
-		System.out.println(dto.getUserid());
-		System.out.println(usercode);
 		/*MemberDTO mdto = this.dao.mdto(usercode);*/
 		MemberDTO inviteDTO = this.dao.selectone2(usercode);
-		List<BandInviteDTO> invitelist = this.dao.invitedto(usercode); 
-		
-		System.out.println(inviteDTO.getUserid());
+
+		BandInviteDTO inviteDTO3 = new BandInviteDTO();
+		inviteDTO3.setBandcode(bandcode);
+		inviteDTO3.setInviteusercode(usercode);
+
+		int invitelist = this.dao.invitedto(inviteDTO3); 
 		
 		int invite = 0; 
 		
-		if(invitelist.isEmpty()) { // 초대 테이블에 없을 때
-			
+		if(invitelist==0) { // 초대 테이블에 없을 때
+
 			BandMemberDTO bandMemberDTO = new BandMemberDTO();
 			bandMemberDTO.setBandcode(bandcode);
 			bandMemberDTO.setUserid(inviteDTO.getUserid());
 			
 			int result = this.dao.bandmember(bandMemberDTO);
-			System.out.println(result);
+
 			if(result == 0) { // 밴드에 없을때 (초대 가능)
 				BandInviteDTO inviteDTO2 = new BandInviteDTO();
 				inviteDTO2.setBandcode(bandcode);
@@ -644,6 +644,7 @@ public class HomeController {
 				invite = 2;
 			}	
 		}else { // 초대 테이블에 있을 때(초대 불가능)
+			
 			invite = 3;
 		}
 		return invite;		

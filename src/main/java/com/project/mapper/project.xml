@@ -153,8 +153,8 @@
   		select * from member where usercode = #{usercode}
   	</select>
   	
-  	<select id="invitedto" resultType="com.project.dto.BandInviteDTO">
-  		select * from bandinvite where inviteusercode = #{usercode}
+  	<select id="invitedto" resultType="int">
+  		select count(*) from bandinvite where inviteusercode = #{inviteusercode} and bandcode=#{bandcode}
   	</select>
   	
   	<select id="selectone2" resultType="com.project.dto.MemberDTO">
@@ -190,11 +190,14 @@
 	</select>
 	
 	<select id="memberlist3" resultType="com.project.dto.BandCountDTO">
-		select bandcode,count(bandcode)as bandcount
-		from bandmember
-		group by bandcode
-		order by bandcount desc
-	</select>
+      select *
+      from
+      (select bandcode,count(bandcode)as bandcount
+      from bandmember
+      group by bandcode
+      order by bandcount desc)
+      where rowNum <![CDATA[  <  ]]> 7
+   </select>
 	
 	<select id="one" resultType="com.project.dto.BandListDTO"
 		parameterType="int">

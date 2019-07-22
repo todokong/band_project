@@ -174,8 +174,8 @@ public class BandDAOImpl implements BandDAO {
 		return this.sqlSession.selectOne("mdto", usercode);
 	}
 	@Override
-	public List<BandInviteDTO> invitedto(int usercode) {
-		return this.sqlSession.selectList("invitedto", usercode);
+	public int invitedto(BandInviteDTO inviteDTO3) {
+		return this.sqlSession.selectOne("invitedto", inviteDTO3);
 	}
 	@Override
 	public MemberDTO selectone2(int usercode) {
@@ -214,22 +214,21 @@ public class BandDAOImpl implements BandDAO {
 	}
 
 	@Override
-	public List<BandListDTO> pop() {
-		List<BandCountDTO> count = this.sqlSession.selectList("memberlist3");
-		
-		List<BandListDTO> pop = new ArrayList<BandListDTO>() ;
-		BandListDTO dto;
-		int bandcode;
-		
-		for(int i=0; i<6;i++) {
-			bandcode=count.get(i).getBandcode();		
-			dto=this.sqlSession.selectOne("one", bandcode);;
-		   pop.add(dto);	
-		}
-		
-		return pop;
-	}
-
+	   public List<BandListDTO> pop() {
+	      List<BandCountDTO> count = this.sqlSession.selectList("memberlist3");
+	      
+	      List<BandListDTO> pop = new ArrayList<BandListDTO>() ;
+	      BandListDTO dto;
+	      int bandcode;
+	      
+	      for(int i=0; i<count.size();i++) {
+	         bandcode=count.get(i).getBandcode();      
+	         dto=this.sqlSession.selectOne("one", bandcode);;
+	         pop.add(dto);   
+	      }
+	      
+	      return pop;
+	   }
 	@Override
 	public void bandcreate(BandListDTO dto, String userid) {
 		this.sqlSession.insert("bandlistadd",dto);

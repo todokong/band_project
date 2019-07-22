@@ -54,7 +54,7 @@ public interface BandDAO {
 	int invitecount(int usercode);
 	void invitemember(BandInviteDTO inviteDTO2);
 	MemberDTO selectone2(int usercode);
-	List<BandInviteDTO> invitedto(int usercode);
+	int invitedto(BandInviteDTO inviteDTO3);
 	MemberDTO mdto(int usercode);
 	List<MemberDTO> mdtolist(String invitename);
 	List<BandBoardDTO> mboardlist2(BandBoardDTO boardDTO);

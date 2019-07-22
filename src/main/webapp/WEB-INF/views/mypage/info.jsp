@@ -25,7 +25,7 @@ function drawMember(data){
 		};
 	});
 	$("#phone1Area").val(uUser.phone.substr( 0, 3 ));
-	$("#phone2Area").val(uUser.phone.substr( 3, (uUser.phone.length-1)));
+	$("#phone2Area").val(uUser.phone.substr( 4, (uUser.phone.length-1)));
 	$("#userName").text(uUser.username);
 }
 function getMember() {

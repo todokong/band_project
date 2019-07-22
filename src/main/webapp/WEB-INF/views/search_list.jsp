@@ -142,7 +142,6 @@ nav {
                data-scroll="home">밴드</a></li>
             <li class="nav-item"><a class="nav-link" href="#popular"
                data-scroll="popular">게시글</a></li>
-               <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/search.do?userid=${userid }">찾기</a></li>
                
             <li class="nav-item dropdown"><a
                class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
@@ -231,11 +230,11 @@ nav {
                         <c:choose>
            		<c:when test="${Paging.pageNo != 1}">
            <a href="javascript:fn_movePage(${Paging.prevPageNo})" style="text-decoration: none; float: left; margin: auto;">
-           <img src="<c:url value='/resources/images/chevron.png' />" height="80px" width="80px"></a>
+           <img src="<c:url value='/resources/bandimage/chevron.png' />" height="80px" width="80px"></a>
            		</c:when>
            		<c:when test="${Paging.pageNo != 0}">
            <a href="javascript:void(0);" style="text-decoration: none; float: left; padding : 0px;">
-           <img src="<c:url value='/resources/images/chevron.png' />" height="80px" width="80px"></a>
+           <img src="<c:url value='/resources/bandimage/chevron.png' />" height="80px" width="80px"></a>
            		</c:when>
           		 </c:choose>
           		 </td>
@@ -247,7 +246,7 @@ nav {
                                  <div class="mb-1 text-muted">${i.getBoarddate() }</div>
                               </div>
                               <img class="card-img-right flex-auto d-none d-lg-block right"
-                                 src='<c:url value="resources/bandimage/${i.getBoardimage() }"/>'
+                                 src="<c:url value='/resources/bandimage/${i.getBoardimage() }'/>"
                                  style="margin: 0;">
                            </div>
                            </td>
@@ -256,11 +255,11 @@ nav {
                            <c:choose>
 				<c:when test="${Paging.pageNo != Paging.finalPageNo }">
             <a href="javascript:fn_movePage(${Paging.nextPageNo})" style="text-decoration: none; float: right;">
-            <img src="<c:url value='/resources/images/chevrondd.png' />" height="80px" width="80px"></a>
+            <img src="<c:url value='/resources/bandimage/chevrondd.png' />" height="80px" width="80px"></a>
        			 </c:when>
        			 <c:when test="${Paging.pageNo == Paging.finalPageNo }">
             <a href="javascript:void(0);" style="text-decoration: none; float: right;">
-            <img src="<c:url value='/resources/images/chevrondd.png' />" height="80px" width="80px"></a>
+            <img src="<c:url value='/resources/bandimage/chevrondd.png' />" height="80px" width="80px"></a>
        			 </c:when>
        			 </c:choose>
        			 </div>

@@ -145,7 +145,7 @@ img { display: block; margin: 0px auto; }
                
                	
                   <div class="carousel-item active "> <!--  클릭한 이미지 active가 있어야 함 -->
-                     <img src='<c:url value="resources/upload/${boarddto.getBoardimage() }"/>'
+                     <img src='<c:url value="resources/bandimage/${boarddto.getBoardimage() }"/>'
                         class="d-block " alt="...">
                   </div>
                 
