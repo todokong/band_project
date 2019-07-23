@@ -356,5 +356,14 @@
          where boardcontent LIKE '%'||#{searchValue}||'%') where rnum BETWEEN #{startRowNo} and #{endRowNo}
         
      </select>
+     
+  	 <select id="bandAllList"  parameterType="com.project.dto.BandMemberDTO" resultType="com.project.dto.BandListDTO">
+  		select * from bandlist order by bandcode desc
+  	</select>
   	
+  	<select id="searchlist" parameterType="com.project.dto.BandMemberDTO" resultType="com.project.dto.BandListDTO">
+  		<![CDATA[
+  		select * from (select * from bandlist order by bandcode desc) where rownum <=3
+  		]]>
+  	</select>
   </mapper>

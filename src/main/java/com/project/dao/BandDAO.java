@@ -89,5 +89,6 @@ public interface BandDAO {
 	public List<BandBoardDTO> searchBandboard(BandBoardDTO bandBoardDTO);
 		
 	public int searchBoardCount(BandBoardDTO bandBoardDTO);
+	List<BandListDTO> bandAllList();
 
 }

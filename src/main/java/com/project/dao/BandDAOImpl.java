@@ -318,5 +318,14 @@ public class BandDAOImpl implements BandDAO {
 	public MemberDTO member(MemberDTO dto) {
 		return this.sqlSession.selectOne("member", dto);
 	}
+	@Override
+	public List<BandListDTO> bandAllList() {
+		return this.sqlSession.selectList("bandAllList");
+	}
+	public List<BandListDTO> searchList() {
+		List<BandListDTO> searchlist = this.sqlSession.selectList("searchlist");
+		
+		return searchlist;
+	}
 	
 }

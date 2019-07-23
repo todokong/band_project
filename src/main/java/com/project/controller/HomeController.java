@@ -892,5 +892,49 @@ public class HomeController {
 	    return "search_list";
 	}
 
+	@RequestMapping("/allSearch.do")
+	public String searchAllBand(@RequestParam("userid") String userid ,Model model, HttpServletRequest request)	{
+		
+		MemberDTO dto2 = this.dao.selectone(userid);
+		int invite = this.dao.invitecount(dto2.getUsercode());
+		
+		model.addAttribute("invite", invite);
+		
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		
+		
+		List<BandListDTO> list = this.dao.bandAllList();
+
+		model.addAttribute("allList", list);
+		return "all_list";
+	}
 	
+	@RequestMapping("/search.do")
+	public String searchBand(@RequestParam("userid") String userid,HttpServletRequest request, Model model)	{
+		
+		MemberDTO dto2 = this.dao.selectone(userid);
+		int invite = this.dao.invitecount(dto2.getUsercode());
+		
+		model.addAttribute("invite", invite);
+		
+		HttpSession session = request.getSession();
+		
+		List<BandListDTO> list = this.dao.searchList();
+		
+		List<BandListDTO> pop= this.dao.pop();
+		
+		
+
+		List<BandBoardDTO> popboard = this.dao.replylist();
+		session.setAttribute("userid", userid);
+		model.addAttribute("userid", userid);
+		model.addAttribute("bandlist",list);
+		model.addAttribute("pop", pop);
+		model.addAttribute("popboard",popboard);
+
+		
+		return "search_main";
+	}
+
 }
