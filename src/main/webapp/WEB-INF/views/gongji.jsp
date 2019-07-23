@@ -21,7 +21,7 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/24e2aa92d8.js"></script>
+<script src="https://kit.fontawesome.com/''.js"></script>
 
 <style type="text/css">
 body {

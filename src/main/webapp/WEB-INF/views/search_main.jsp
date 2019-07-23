@@ -19,7 +19,7 @@
 <!-- Latest compiled JavaScript -->
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/''.js"></script>
+<script src="https://kit.fontawesome.com/24e2aa92d8.js"></script>
 <style type="text/css">
 body {
    background-color: #EAEAEA;
@@ -96,6 +96,7 @@ nav {
                });
       }
    });
+   
    //페이지 이동
    function fn_movePage(val){
        jQuery("input[name=pageNo]").val(val);
@@ -114,11 +115,11 @@ nav {
    }
    
    function Enter_Check() {
-         // 엔터키의 코드는 13입니다.
+   	   // 엔터키의 코드는 13입니다.
        if(event.keyCode == 13){
             fn_search();  // 실행할 이벤트
        }
-   }
+	}
 </script>
 </head>
 <body data-spy="scroll" data-target=".navbar">
@@ -127,28 +128,13 @@ nav {
       <div class="container pagewidth">
          <a class="navbar-brand"
             href="<%=request.getContextPath() %>/bandlist.do?userid=${userid }">BAND</a>
-
-         <!--  현욱 -->
-         <form method="post" action="find.do" id="frm" name="frm" class="form-inline">
-            <input type="hidden" name="pageNo" />
-            <!-- //페이지 번호 -->
-            <input type="hidden" name="searchValue" id="searchValue"
-               value="${Paging.searchValue }" />
-            <!-- //검색어 -->
-            <!--  <a href="search.do" id="logo">이미지</a> -->
-
-            <div class="box" align="center">
-               <div class="container-1">
-
-                  <input class="form-control mr-sm-2" type="text" name="search" id="search"
-                     placeholder="Search..." onkeypress="JavaScript:Enter_Check();" />
-                  <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="SEARCH" onclick="fn_search();" />
-               </div>
-            </div>
-
+         <form class="form-inline" action="find.do?userid=${userid }" id="frm" name="frm">
+         <input type="hidden" name="pageNo" /><!-- //페이지 번호 -->
+    	<input type="hidden" name="searchValue" id="searchValue" value="${Paging.searchValue }" /><!-- //검색어 -->
+            <input class="form-control mr-sm-2" type="search"
+               placeholder="Search" aria-label="Search" name="search" id="search" onkeypress="JavaScript:Enter_Check();">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="fn_search();">Search</button>
          </form>
-
-         <!--  현욱 end -->
          <ul class="nav nav-pills" role="tablist">
             <li class="nav-item"><a class="nav-link" href="#"
                data-toggle="modal" data-target="#exampleModal">밴드 추가 </a></li>
@@ -158,20 +144,22 @@ nav {
                data-scroll="popular">인기글</a></li>
             <li class="nav-item"><a class="nav-link" href="#popband"
                data-scroll="popband">인기밴드</a></li>
-               <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() %>/search.do?userid=${userid }">찾기</a></li>
+               
             <li class="nav-item dropdown"><a
                class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
                role="button" aria-haspopup="true" aria-expanded="false"><i
-                  class="fas fa-user-alt"></i><c:if test="${invite != 0 }">
+                  class="fas fa-user-alt"></i>
+                  <c:if test="${invite != 0 }">
 									<i class="fas fa-exclamation" style="color: red;"></i>
-								</c:if></a>
+								</c:if>
+                  </a>
                <div class="dropdown-menu">
                   <a class="dropdown-item" href="mypage_info_${userid }.do">내정보
                   <c:if test="${invite != 0 }">
 									<i class="fas fa-exclamation" style="color: red;"></i>
-								</c:if></a> <a class="dropdown-item"
-                     href="#">설정
-                     </a>
+								</c:if>
+								</a> <a class="dropdown-item"
+                     href="#">설정</a>
                   <div role="separator" class="dropdown-divider"></div>
                   <a class="dropdown-item" href="logout.do">로그아웃</a>
                </div></li>
@@ -225,8 +213,8 @@ nav {
    </div>
    <div class="jumbotron jumbotron-fluid cotainer">
       <div class="container">
-         <h6 class="display-4">내가 가입한 밴드</h6>
-         
+         <h6 class="display-4">새로 시작한 밴드</h6>
+         <a href="<%=request.getContextPath() %>/allSearch.do?userid=${userid }" style="float: right;">모두보기></a>
       </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
    </div>
 
@@ -263,7 +251,7 @@ nav {
                                     onclick="location.href='select2.do?bandcode=${i.getBandcode()}&userid=${userid }'">들어가기</button>
 
                               </div>
-                              <small class="text-muted">멤버 ${i.getBandcount()}명</small>
+                              <%-- <small class="text-muted">멤버 ${i.getBandcount()}명</small> --%>
                            </div>
                         </div>
                      </div>

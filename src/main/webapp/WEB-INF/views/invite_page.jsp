@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="http://taitems.github.com/UX-Lab/core/css/prettify.css" />
 <script type="text/javascript" src='<c:url value="/resources/js/jquery.fn.gantt.js" />'></script>
 <script src="http://taitems.github.com/UX-Lab/core/js/prettify.js"></script>
-<script src="https://kit.fontawesome.com/24e2aa92d8.js"></script>
+<script src="https://kit.fontawesome.com/''.js"></script>
 <style type="text/css">
 .list-group-item.active {
     background-color: #343a40;

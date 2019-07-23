@@ -23,7 +23,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/24e2aa92d8.js"></script>
+<script src="https://kit.fontawesome.com/''.js"></script>
 <script type="text/javascript">
 $(window).scroll(function(){
 	if($(window).scrollTop() >= $(document).height() - $(window).height()){
