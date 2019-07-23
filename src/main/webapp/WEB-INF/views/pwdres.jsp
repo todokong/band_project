@@ -125,7 +125,7 @@ margin-bottom: -30px;
 
 </head>
 
-<h1>bond</h1>
+<h1>BAND</h1>
  <form class="bottom" align="center">
  <script language = "javascript">
     swal("비밀번호는 '"+"${pwd }"+"' 입니다");

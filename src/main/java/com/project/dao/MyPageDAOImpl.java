@@ -33,5 +33,9 @@ public class MyPageDAOImpl implements MyPageDAO {
 	public List<BoardReplyDTO> getReply(Map<String, Object> m) {
 		return sqlSession.selectList("getReply",m);
 	}
-
+	
+	@Override
+	public void updatePassword(MemberDTO member) {
+		sqlSession.update("changePwd", member);
+	}
 }

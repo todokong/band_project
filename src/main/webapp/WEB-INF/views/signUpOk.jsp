@@ -54,7 +54,7 @@ h2 {
 </style>
 </head>
 <body>
-<h1 class="hh1">bond</h1>
+<h1 class="hh1">BAND</h1>
 <form align="center"  class="login-form">
 
 <h2>회원가입이 완료되었습니다.</h2>

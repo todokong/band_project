@@ -24,9 +24,8 @@ function drawMember(data){
 			uUser = m;
 		};
 	});
-	$("#phone1Area").val(uUser.phone.substr( 0, 3 ));
-	$("#phone2Area").val(uUser.phone.substr( 4, (uUser.phone.length-1)));
-	$("#userName").text(uUser.username);
+
+
 }
 function getMember() {
 	$.ajax({
@@ -47,6 +46,32 @@ function getMember() {
 $(function(){
 	getMember();
 });
+
+
+function updatePwd() {
+	var result = confirm("비밀번호를 변경하시겠습니까?");
+	if(result){
+    	$.ajax({
+        	url: "change_pwd.do",
+        	type: 'get',
+        	data: {
+            	userid: userid,
+            	pwd: $("#pwd-new").val()
+        	},
+        	success : function(){
+        		$("#pwd-new").val('');
+			},
+        	error: function(jqXHR, textStatus, errorThrown) {
+            	console.log('error \n[' + textStatus + ']\n' + errorThrown);
+        	},
+        	complete: function() {
+            	$("#pwd-new").val('');
+        	}
+    	});
+	}else{
+		return false;
+	}
+}
 </script>
 <style type="text/css">
 .marginLeft20px {    
@@ -129,14 +154,15 @@ a {
 					</div>
 					<div class="col-lg-9">
 						<div class="row my-4">
-							<div class="col-lg-2">
+						<div class="col-lg-2">
 								<label class = "input-group-text">이름</label>
 							</div>
 							<div class="col-lg-8 input-group">
-								<span class="input-group-text" id = "userName"></span>
+								<span class="input-group-text" id = "userName">${dto.username}</span>
 							</div>
 							<div class="col-lg-2">
 							</div>
+						
 						</div>
 						<div class="row my-4">
 							<div class="col-lg-2">
@@ -155,9 +181,11 @@ a {
 								<div class="input-group-prepend">
 									<div class="input-group-text">
 										<input type="checkbox"> 
+											<span class="input-group-text" >음력</span>
+											<input type="checkbox"> 
+											<span class="input-group-text" >양력</span>
 									</div>
 								</div>
-								<span class="input-group-text" >음력</span>
 							</div>
 							<div class="col-lg-2">
 								<button class="btn" style = "background-color: #e9ecef;">확인</button>
@@ -169,42 +197,40 @@ a {
 					<div class="col-lg-3">
 						<h6 class="marginLeft20px">로그인 계정</h6>
 					</div>
-					<div class="col-lg-9">
+					
+					<div class="col-lg-9" >
 						<div class="row my-4">
 							<div class="col-lg-2">
 								<label class = "input-group-text">휴대폰 번호</label>
 							</div>
 							<div class="col-lg-8 input-group">
-								<select class="form-control"  style="width: 50px;" id = "phone1Area">
-									<option class="form-control">선택</option>
-									<option class="form-control" value = "010">010</option>
-								</select>
-								<input type="text" class="form-control" id = "phone2Area">
-								<button class="btn" style = "background-color: #e9ecef;">확인</button>
+								
+								<input type="text" class="form-control" id = "phone2Area"  value="${dto.phone}" readonly>
+								
 							</div>
 							<div class="col-lg-2">
-								<button class="btn" style = "background-color: #ffffff;">취소</button>
+							
 							</div>
 						</div>
 						<div class="row my-4">
 							<div class="col-lg-2">
-								<label class = "input-group-text">이메일</label>
+								<label class = "input-group-text">아이디</label>
 							</div>
 							<div class="col-lg-8 input-group">
-								<input type="text" class="form-control" placeholder="이메일 주소 입력" >
+								<input type="text" class="form-control"  value="${dto.userid }"readonly>
 							</div>
-							<div class="col-lg-2">
-								<button class="btn" style = "background-color: #e9ecef;">확인</button>
-							</div>
+				
 						</div>
 						<div class="row my-4">
 							<div class="col-lg-2">
 								<label class = "input-group-text">비밀번호</label>
 							</div>
 							<div class="col-lg-8 input-group">
+						         <input type="password" class="form-control" value="${dto.pwd}"readonly>
+							    <input type="text" class="form-control" placeholder="새 비밀번호 입력" id="pwd-new">
 							</div>
 							<div class="col-lg-2">
-								<button class="btn" style = "background-color: #ffffff;">변경</button>
+								<button class="btn" style = "background-color: #ffffff;" onclick="updatePwd();">변경</button>
 							</div>
 						</div>
 					</div>

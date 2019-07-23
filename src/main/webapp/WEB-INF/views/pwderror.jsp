@@ -178,7 +178,7 @@ margin-left: 40px;
 </style>
 </head>
 <body >
-<h1>bond</h1>
+<h1>BAND</h1>
  <form class="bottom" align="center">
 
 

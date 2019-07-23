@@ -87,4 +87,13 @@ public class MypageController {
 		return new Gson().toJson(mypageService.getReply(userid));
 	}
 		
+	@RequestMapping(value="/change_pwd.do")
+	@ResponseBody
+	public void changePassword(@RequestParam(value = "userid")String userid, @RequestParam(value = "pwd")String pwd) {
+		MemberDTO dto = this.dao.selectone(userid);
+		dto.setPwd(pwd);
+		
+		mypageService.updatePwd(dto);
+	}
+
 }

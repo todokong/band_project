@@ -245,9 +245,11 @@ nav {
                                  <p class="card-text mb-auto" style="color: black;">${i.getBoardcontent() }</p>
                                  <div class="mb-1 text-muted">${i.getBoarddate() }</div>
                               </div>
+                             <c:if test="${i.getBoardimage() != 'no_file' }">
                               <img class="card-img-right flex-auto d-none d-lg-block right"
                                  src="<c:url value='/resources/bandimage/${i.getBoardimage() }'/>"
                                  style="margin: 0;">
+                             </c:if>
                            </div>
                            </td>
                            <td>
@@ -330,12 +332,12 @@ nav {
                   <div class="col-md-4">
                      <div class="card mb-4 shadow-sm">
                         <c:if test="${'no_file'ne i.getBandimage()}">
-                           <img
+                           <img style="height: 180px;"
                            src='<c:url value="resources/bandimage/${i.getBandimage() }"/>'
                            class="img-fluid" >
                         </c:if>
                         <c:if test="${'no_file'eq i.getBandimage()}">
-                           <img
+                           <img style="height: 180px;"
                            src='<c:url value="resources/bandimage/no_file.png"/>'
                            class="img-fluid" >
                         </c:if>

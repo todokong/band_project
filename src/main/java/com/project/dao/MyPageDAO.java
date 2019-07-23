@@ -12,4 +12,5 @@ public interface MyPageDAO {
 	public List<MemberDTO> getMember();
 	public List<BandBoardDTO> getBoard(Map<String, Object> m);
 	public List<BoardReplyDTO> getReply(Map<String, Object> m);
+	public void updatePassword(MemberDTO member);
 }

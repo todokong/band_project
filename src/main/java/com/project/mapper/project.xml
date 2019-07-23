@@ -296,7 +296,9 @@
 			id = #{id}
     </update> -->
   	
-  	
+  	<update id = "changePwd" parameterType = "com.project.dto.MemberDTO">
+		UPDATE member SET pwd=#{pwd} WHERE userid=#{userid}
+	</update>
   	
   	
   	
@@ -350,7 +352,7 @@
      <select id="searchBoard" parameterType="com.project.dto.BandBoardDTO" resultType="com.project.dto.BandBoardDTO">
         
         select * from (select row_number() over(order by boarddate desc) as rnum, b.bandcode, b.userid, b.username, 
-         b.boardcode, b.boardcontent, b.boarddate, l.bandname from bandboard b join bandlist l on b.bandcode=l.bandcode
+         b.boardcode, b.boardcontent, b.boarddate, b.boardimage, l.bandname from bandboard b join bandlist l on b.bandcode=l.bandcode
          where boardcontent LIKE '%'||#{searchValue}||'%') where rnum BETWEEN #{startRowNo} and #{endRowNo}
         
      </select>

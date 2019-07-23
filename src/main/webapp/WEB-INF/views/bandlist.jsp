@@ -243,12 +243,12 @@ nav {
                      <div class="card mb-4 shadow-sm">
                      
                         <c:if test="${'no_file'ne i.getBandimage()}">
-                           <img
+                           <img style="height: 180px;"
                            src='<c:url value="resources/bandimage/${i.getBandimage() }"/>'
                            class="img-fluid" >
                         </c:if>
                         <c:if test="${'no_file'eq i.getBandimage()}">
-                           <img
+                           <img style="height: 180px;"
                            src='<c:url value="resources/bandimage/no_file.png"/>'
                            class="img-fluid" >
                         </c:if>

@@ -29,4 +29,8 @@ public class MypageService {
 		m.put("userid", userid);
 		return myPageDAO.getReply(m);
 	}
+	public void updatePwd(MemberDTO member) {
+		myPageDAO.updatePassword(member);
+	}
+
 }

@@ -118,7 +118,7 @@ margin-bottom: -30px;
 
 
 
-<h1>bond</h1>
+<h1>BAND</h1>
  <form class="bottom" align="center">
 
 

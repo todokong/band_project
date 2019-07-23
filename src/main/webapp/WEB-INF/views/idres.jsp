@@ -126,7 +126,7 @@ margin-bottom: -30px;
 </head>
 <body onload = "testAlert()" >
 
-<h1>bond</h1>
+<h1>BAND</h1>
 
 
 
